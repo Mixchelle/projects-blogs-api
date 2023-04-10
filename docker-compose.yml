@@ -53,7 +53,6 @@ services:
     container_name: blogs_api_db
     image: mysql:8.0.23
     # Indica de forma fixa a plataforma na qual o banco irá rodar
-    platform: linux/x86_64
     restart: always
     ports:
       # Garanta que não haverá conflitos de porta com um banco que esteja
