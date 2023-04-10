@@ -13,7 +13,7 @@
     "jsonwebtoken": "9.0.0",
     "morgan": "1.10.0",
     "mysql2": "2.1.0",
-    "sequelize": "6.30.0",
+    "sequelize": "6.3.4",
     "shelljs": "0.8.5"
   },
   "main": "src/server.js",
@@ -44,5 +44,9 @@
     "sequelize-jest-helpers-trybe": "1.0.0",
     "supertest": "4.0.2",
     "wait-on": "6.0.1"
-  }
+  },
+  "description": "Para realizar o projeto, atente-se a cada passo descrito a seguir, e se tiver qualquer dúvida, nos envie por _Slack_! #vqv 🚀",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
