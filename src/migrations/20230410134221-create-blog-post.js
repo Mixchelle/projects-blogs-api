@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const BlogPosts = queryInterface.createTable('BlogPosts', {
+    const BlogPosts = queryInterface.createTable('blog_posts', {
       id:                         
       {
         allowNull: false,         
@@ -20,15 +20,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      userId:                
-      {
-        type: Sequelize.INTEGER,  
-        allowNull: false,         
-        onUpdate: 'CASCADE',      
-        onDelete: 'CASCADE',              
-        references: {             
-          model: 'Users',         
-          key: 'id',           
+      user_id: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        references: {
+          model: 'users',
+          key: 'id'
         }
       },
       published: {
@@ -44,6 +42,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable('BlogPosts');
+    queryInterface.dropTable('blog_posts');
   }
 };

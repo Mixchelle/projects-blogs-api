@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const Users = queryInterface.createTable('Users', {
+    const Users = queryInterface.createTable('users', {
       id:                        
       {
         allowNull: false,         
@@ -10,7 +10,7 @@ module.exports = {
         primaryKey: true,         
         type: Sequelize.INTEGER, 
       },
-      displayName:
+      display_name:
       {
         allowNull: false,
         type: Sequelize.STRING,  
@@ -35,7 +35,6 @@ module.exports = {
   },
  
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable('Users');
+    queryInterface.dropTable('users');
   }
 };
-
