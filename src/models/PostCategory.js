@@ -4,15 +4,16 @@ module.exports = (sequelize, DataTypes) => {
     categoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      foreignKey: true,
       primaryKey: true,
     },
     postId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      foreignKey: true,
       primaryKey: true,
     },
   },
-
     {
       tableName: 'PostCategory',
       underscored: true,
