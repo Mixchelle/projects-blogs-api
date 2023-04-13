@@ -12,6 +12,30 @@ const newPost = async (req, res) => {
   }
 };
 
+const getPost = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const result = await postService.getpost(userId);
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+const getPostId = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { id } = req.params;
+    const result = await postService.getPostId(userId, id);
+    if (result.message) return res.status(404).json(result);
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   newPost,
+  getPost,
+  getPostId,
 };
