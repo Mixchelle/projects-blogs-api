@@ -1,5 +1,18 @@
 const { BlogPost, PostCategory, Category, User } = require('../models');
 
+const info = [
+  {
+    model: User,
+    as: 'user',
+    attributes: { exclude: ['password'] },
+  },
+  {
+    model: Category,
+    as: 'categories',
+    through: { attributes: [] },
+  },
+];
+
 // eslint-disable-next-line max-lines-per-function
 const newPost = async ({ content, categoryIds, title }, userId) => {
   const catExist = await Category.findAll({ where: { id: categoryIds } });
@@ -23,19 +36,6 @@ return post;
 };
 
 const getpost = async (userId) => {
-  const info = [
-      {
-        model: User,
-        as: 'user',
-        attributes: { exclude: ['password'] },
-      },
-      {
-        model: Category,
-        as: 'categories',
-        through: { attributes: [] },
-      },
-    ];
-
   const post = await BlogPost.findAll({
   where: { userId },
     include: info,
@@ -44,18 +44,6 @@ const getpost = async (userId) => {
 };
 
 const getPostId = async (userId, id) => {
-  const info = [
-    {
-      model: User,
-      as: 'user',
-      attributes: { exclude: ['password'] },
-    },
-    {
-      model: Category,
-      as: 'categories',
-      through: { attributes: [] },
-    },
-  ];
   const post = await BlogPost.findOne({
     where: { userId, id },
     include: info,
@@ -64,4 +52,27 @@ const getPostId = async (userId, id) => {
   return post;
 };
 
-module.exports = { newPost, getpost, getPostId };
+const editPost = async ({ title, content }, id, userId) => {
+    const postInfo = { 
+      title,
+      content,
+      updated: new Date(),
+    };
+
+    await BlogPost.update(postInfo, { where: { userId, id } });
+
+   const post = await BlogPost.findOne({
+    where: { userId, id },
+    include: info,
+  });
+
+  const idExisti = await BlogPost.findOne({
+    where: { userId },
+  });
+  
+  if (idExisti !== userId) return { message: 'Unauthorized user' };
+
+  return post;
+};
+
+module.exports = { newPost, getpost, getPostId, editPost };

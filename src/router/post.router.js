@@ -5,6 +5,7 @@ const validate = require('../middlewares/validatePost');
 
 postRouter.use(tokenRes);
 postRouter.post('/', validate, postController.newPost);
+postRouter.put('/:id', validate, postController.editpost);
 postRouter.get('/', postController.getPost);
 postRouter.get('/:id', postController.getPostId);
 
